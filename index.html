@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InkForge — By Avoliro</title>
+
+<style>
+/* === GLOBALS === */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ background:#000;
+ color:#fff;
+ font-family:"Montserrat",sans-serif;
+ scroll-behavior:smooth;
+ overflow-x:hidden;
+}
+.nav{
+ position:fixed;
+ top:0;width:100%;
+ display:flex;justify-content:space-between;
+ padding:15px 40px;
+ background:rgba(0,0,0,.7);
+ backdrop-filter:blur(12px);
+ z-index:1000;
+}
+.brand-logo{height:45px}
+nav a{
+ margin-left:20px;color:#fff;text-decoration:none;
+ opacity:.7;transition:.3s;font-weight:500;
+}
+nav a:hover{opacity:1}
+
+/* === PAGE FADE === */
+.fade-enter{opacity:0;transform:translateY(20px)}
+.fade-enter-active{
+ opacity:1;transform:translateY(0);transition:.9s ease;
+}
+
+/* === HERO === */
+.hero{
+ height:100vh;display:flex;flex-direction:column;
+ justify-content:center;text-align:center;position:relative;
+}
+#particles{
+ position:absolute;top:0;left:0;width:100%;height:100%;
+ filter:blur(.6px);
+}
+.hero-title{font-size:60px;font-weight:700;z-index:2}
+.hero-subtitle{margin-top:12px;font-size:20px;z-index:2}
+.cta-btn{
+ z-index:2;margin-top:25px;padding:13px 30px;
+ background:#e50914;border-radius:8px;font-weight:600;
+ color:#fff;text-decoration:none;transition:.3s;
+}
+.cta-btn:hover{transform:translateY(-3px)}
+
+/* === SECTIONS === */
+section{padding:100px 40px;text-align:center}
+
+/* === 3D CARDS === */
+.cards{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+.card{
+ width:260px;padding:25px;background:#111;
+ border-radius:14px;border:1px solid #222;
+ transform-style:preserve-3d;transition:.35s;
+ box-shadow:0 0 0 rgba(255,0,0,0);
+}
+.card:hover{
+ border-color:#e50914;
+}
+
+/* === PORTFOLIO SLIDER === */
+.slider-container{
+ position:relative;display:flex;justify-content:center;align-items:center;
+ margin-top:40px;
+}
+.slider{width:80%;display:flex;overflow:hidden}
+.slide{min-width:100%;transition:.6s}
+.slide img{width:100%;border-radius:12px}
+.caption{opacity:.8;margin-top:6px}
+.slide-btn{
+ position:absolute;background:#e50914;border:none;
+ font-size:30px;padding:5px 12px;border-radius:6px;
+ cursor:pointer;transition:.3s;z-index:10;
+}
+.slide-btn:hover{background:#ff1f2b}
+.left{left:10px}.right{right:10px}
+
+footer{padding:25px;opacity:.6;margin-top:60px}
+</style>
+
+</head>
+<body class="fade-enter">
+
+<header class="nav">
+ <img src="logo.png" class="brand-logo" alt="InkForge">
+ <nav>
+   <a href="#services">Services</a>
+   <a href="#portfolio">Portfolio</a>
+   <a href="#contact">Contact</a>
+ </nav>
+</header>
+
+<section class="hero" id="hero">
+ <canvas id="particles"></canvas>
+ <h2 class="hero-title">Forging Visual Experiences</h2>
+ <p class="hero-subtitle">Premium Graphic Design by Avoliro</p>
+ <a class="cta-btn" href="#contact">Work With Us</a>
+</section>
+
+<section id="services">
+ <h3>Our Expertise</h3>
+ <div class="cards">
+   <div class="card"><h4>Brand Identity</h4><p>Logo, Branding, Guidelines</p></div>
+   <div class="card"><h4>Packaging Design</h4><p>Print-ready product packaging</p></div>
+   <div class="card"><h4>Ad Creatives</h4><p>Social & Paid campaign visuals</p></div>
+ </div>
+</section>
+
+<section id="portfolio">
+ <h3>Case Studies</h3>
+ <div class="slider-container">
+   <button class="slide-btn left" onclick="prevSlide()">‹</button>
+   <div class="slider">
+     <div class="slide">
+       <img src="https://via.placeholder.com/900x500?text=Your+Project+Here">
+       <p class="caption">Branding Showcase</p>
+     </div>
+     <div class="slide">
+       <img src="https://via.placeholder.com/900x500?text=Add+Your+Work">
+       <p class="caption">Product Design</p>
+     </div>
+     <div class="slide">
+       <img src="https://via.placeholder.com/900x500?text=Portfolio+Coming+Soon">
+       <p class="caption">Campaign Graphics</p>
+     </div>
+   </div>
+   <button class="slide-btn right" onclick="nextSlide()">›</button>
+ </div>
+</section>
+
+<section id="contact">
+ <h3>Let’s Build Something Bold</h3>
+ <p>Share what you need, we’ll forge it.</p>
+ <a href="mailto:avoliro@contact" class="cta-btn">Email Us</a>
+</section>
+
+<footer>© 2025 InkForge — Avoliro Sub-Brand</footer>
+
+
+<script>
+/* === PAGE TRANSITION === */
+window.onload=()=>document.body.classList.add("fade-enter-active");
+
+/* === SLIDER === */
+let slideIndex=0;
+const slides=document.querySelectorAll('.slide');
+const showSlide=i=>slides.forEach((s,index)=>s.style.transform=`translateX(${(index-i)*100}%)`);
+showSlide(0);
+const nextSlide=()=>{slideIndex=(slideIndex+1)%slides.length;showSlide(slideIndex)};
+const prevSlide=()=>{slideIndex=(slideIndex-1+slides.length)%slides.length;showSlide(slideIndex)};
+
+/* === MOUSE LIGHT PARALLAX ON CARDS === */
+document.querySelectorAll('.card').forEach(card=>{
+ card.addEventListener('mousemove',e=>{
+  const r=card.getBoundingClientRect();
+  const x=e.clientX-r.left,y=e.clientY-r.top;
+  const rx=(y-r.height/2)/20,ry=(x-r.width/2)/20;
+  card.style.transform=`rotateX(${-rx}deg) rotateY(${ry}deg)`;
+  card.style.boxShadow=`${ry*2}px ${rx*2}px 20px rgba(229,9,20,0.5)`;
+ })
+ card.addEventListener('mouseleave',()=>{
+  card.style.transform=`rotateX(0deg) rotateY(0deg)`;
+  card.style.boxShadow=`0 0 0 rgba(0,0,0,0)`;
+ })
+})
+
+/* === FORGE SPARK PARTICLES (Glow + physics) === */
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=innerWidth;canvas.height=innerHeight;
+let p=[];
+class Spark{
+ constructor(){
+   this.reset();
+ }
+ reset(){
+   this.x=innerWidth/2+(Math.random()-0.5)*200;
+   this.y=innerHeight-50;
+   this.vx=(Math.random()-0.5)*3;
+   this.vy=-Math.random()*4-2;
+   this.alpha=1;
+   this.size=Math.random()*4+1;
+ }
+ update(){
+   this.x+=this.vx;this.y+=this.vy;
+   this.vy+=.05;this.alpha-=.01;
+   if(this.alpha<=0)this.reset();
+ }
+ draw(){
+   ctx.beginPath();
+   ctx.fillStyle=`rgba(229,9,20,${this.alpha})`;
+   ctx.shadowBlur=12;ctx.shadowColor="#ff2a33";
+   ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+   ctx.fill();ctx.closePath();
+ }
+}
+for(let i=0;i<120;i++)p.push(new Spark());
+function loop(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ p.forEach(s=>{s.update();s.draw()});
+ requestAnimationFrame(loop);
+}
+loop();
+
+</script>
+
+</body>
+</html>
