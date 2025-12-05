@@ -3,217 +3,329 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>InkForge — By Avoliro</title>
+<title>InkForge — Premium Graphic Design</title>
 
 <style>
-/* === GLOBALS === */
+/* GLOBALS */
 *{margin:0;padding:0;box-sizing:border-box}
 body{
- background:#000;
- color:#fff;
- font-family:"Montserrat",sans-serif;
- scroll-behavior:smooth;
- overflow-x:hidden;
+ background:#000;color:#fff;font-family:"Montserrat",sans-serif;
+ scroll-behavior:smooth;overflow-x:hidden;
 }
+
+/* NAV */
 .nav{
- position:fixed;
- top:0;width:100%;
- display:flex;justify-content:space-between;
- padding:15px 40px;
- background:rgba(0,0,0,.7);
- backdrop-filter:blur(12px);
- z-index:1000;
+ position:fixed;top:0;width:100%;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:18px 60px;z-index:999;
+ background:rgba(0,0,0,.75);backdrop-filter:blur(14px);
+ border-bottom:1px solid rgba(255,255,255,0.05);
 }
-.brand-logo{height:45px}
+.brand-logo{
+ height:75px;
+ filter:drop-shadow(0 0 12px rgba(255,255,255,.4));
+ transition:.3s;
+}
+.brand-logo:hover{
+ transform:scale(1.04);
+ filter:drop-shadow(0 0 18px rgba(255,255,255,.8));
+}
 nav a{
- margin-left:20px;color:#fff;text-decoration:none;
- opacity:.7;transition:.3s;font-weight:500;
+ margin-left:28px;color:#fff;text-decoration:none;
+ font-weight:600;opacity:.75;font-size:15px;letter-spacing:1px;
+ transition:.25s;
 }
-nav a:hover{opacity:1}
+nav a:hover{opacity:1;color:#e50914}
 
-/* === PAGE FADE === */
-.fade-enter{opacity:0;transform:translateY(20px)}
+/* PAGE FADE */
+.fade-enter{opacity:0;transform:translateY(30px)}
 .fade-enter-active{
- opacity:1;transform:translateY(0);transition:.9s ease;
+ opacity:1;transform:translateY(0);
+ transition:1.2s cubic-bezier(.19,1,.22,1);
 }
 
-/* === HERO === */
+/* HERO */
 .hero{
  height:100vh;display:flex;flex-direction:column;
  justify-content:center;text-align:center;position:relative;
 }
 #particles{
  position:absolute;top:0;left:0;width:100%;height:100%;
- filter:blur(.6px);
 }
-.hero-title{font-size:60px;font-weight:700;z-index:2}
-.hero-subtitle{margin-top:12px;font-size:20px;z-index:2}
+.hero-title{
+ font-size:82px;font-weight:900;z-index:2;
+ text-shadow:0 0 18px rgba(255,255,255,.15);
+}
+.hero-subtitle{
+ margin-top:20px;font-size:22px;opacity:.9;z-index:2;
+ letter-spacing:2px;min-height:1.4em;
+}
 .cta-btn{
- z-index:2;margin-top:25px;padding:13px 30px;
- background:#e50914;border-radius:8px;font-weight:600;
- color:#fff;text-decoration:none;transition:.3s;
+ z-index:2;margin-top:35px;padding:15px 42px;
+ background:#e50914;border-radius:10px;font-weight:700;
+ font-size:18px;text-decoration:none;color:#fff;
+ transition:.3s;letter-spacing:1px;
+ box-shadow:0 0 16px rgba(229,9,20,.4);
 }
-.cta-btn:hover{transform:translateY(-3px)}
+.cta-btn:hover{
+ transform:translateY(-4px);
+ box-shadow:0 0 28px rgba(229,9,20,.7);
+}
 
-/* === SECTIONS === */
-section{padding:100px 40px;text-align:center}
+/* SECTIONS */
+section{
+ padding:120px 60px;text-align:center;
+}
+h3{
+ font-size:42px;font-weight:800;margin-bottom:42px;
+}
 
-/* === 3D CARDS === */
-.cards{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+/* 3D CARDS WITH METALLIC BORDER */
+.cards{display:flex;gap:36px;justify-content:center;flex-wrap:wrap}
 .card{
- width:260px;padding:25px;background:#111;
- border-radius:14px;border:1px solid #222;
- transform-style:preserve-3d;transition:.35s;
- box-shadow:0 0 0 rgba(255,0,0,0);
+ position:relative;
+ width:300px;padding:42px;background:#050505;
+ border-radius:16px;border:1px solid #222;
+ transform-style:preserve-3d;
+ transition:.35s;cursor:pointer;
+ font-size:18px;font-weight:500;
+ overflow:hidden;
 }
-.card:hover{
- border-color:#e50914;
+.card::before{
+ content:"";
+ position:absolute;inset:-1px;
+ background:linear-gradient(135deg,#ffffff,#bbbbbb,#e50914,#111111);
+ z-index:-1;
+}
+.card::after{
+ content:"";
+ position:absolute;inset:2px;
+ border-radius:14px;
+ background:#050505;
+ z-index:0;
+}
+.card > *{
+ position:relative;z-index:1;
 }
 
-/* === PORTFOLIO SLIDER === */
+/* SLIDER */
 .slider-container{
  position:relative;display:flex;justify-content:center;align-items:center;
- margin-top:40px;
+ margin-top:60px;
 }
-.slider{width:80%;display:flex;overflow:hidden}
-.slide{min-width:100%;transition:.6s}
-.slide img{width:100%;border-radius:12px}
-.caption{opacity:.8;margin-top:6px}
-.slide-btn{
- position:absolute;background:#e50914;border:none;
- font-size:30px;padding:5px 12px;border-radius:6px;
- cursor:pointer;transition:.3s;z-index:10;
+.slider{width:80%;overflow:hidden;display:flex}
+.slide{min-width:100%;transition:.7s}
+.slide img{
+ width:100%;border-radius:14px;
+ box-shadow:0 8px 40px rgba(0,0,0,.6);
 }
-.slide-btn:hover{background:#ff1f2b}
-.left{left:10px}.right{right:10px}
+.caption{
+ margin-top:10px;opacity:.85;font-size:18px;
+ font-weight:500;letter-spacing:1px;
+}
 
-footer{padding:25px;opacity:.6;margin-top:60px}
+.slide-btn{
+ position:absolute;top:50%;transform:translateY(-50%);
+ background:#e50914;border:none;border-radius:10px;
+ font-size:48px;color:#fff;
+ padding:2px 18px;cursor:pointer;transition:.3s;
+ box-shadow:0 0 18px rgba(229,9,20,.55);
+}
+.slide-btn:hover{background:#ff1f2b;transform:translateY(-50%) scale(1.1)}
+.left{left:25px}.right{right:25px}
+
+/* FOOTER */
+footer{
+ padding:40px;text-align:center;
+ font-size:16px;opacity:.8;
+ border-top:1px solid rgba(255,255,255,.08);
+ letter-spacing:1px;
+}
+footer span{
+ color:#e50914;font-weight:700;
+}
+
+/* HAMMER INTRO OVERLAY */
+.hammer-overlay{
+ position:fixed;inset:0;
+ background:radial-gradient(circle at center,#111 0%,#000 70%);
+ display:flex;justify-content:center;align-items:center;
+ z-index:2000;
+}
+#hammer{
+ width:120px;height:120px;
+ border-radius:18px;
+ background:linear-gradient(135deg,#ffffff,#aaaaaa,#444444);
+ position:relative;
+ box-shadow:0 0 40px rgba(255,255,255,.5);
+ transform-origin:top left;
+ animation:hammer-strike .8s cubic-bezier(.19,1,.22,1) forwards;
+}
+#hammer::before{
+ content:"";
+ position:absolute;left:50%;top:100%;
+ width:18px;height:130px;
+ background:linear-gradient(180deg,#7a3b13,#3d1b06);
+ transform:translateX(-50%);
+ border-radius:20px;
+ box-shadow:0 0 16px rgba(0,0,0,.9);
+}
+
+@keyframes hammer-strike{
+ 0%{transform:translate(-200px,-220px) rotate(-70deg);}
+ 70%{transform:translate(10px,10px) rotate(-5deg);}
+ 100%{transform:translate(0,30px) rotate(-15deg);}
+}
 </style>
 
 </head>
 <body class="fade-enter">
 
+<!-- Hammer intro -->
+<div class="hammer-overlay" id="hammerOverlay">
+  <div id="hammer"></div>
+</div>
+
 <header class="nav">
  <img src="logo.png" class="brand-logo" alt="InkForge">
  <nav>
-   <a href="#services">Services</a>
-   <a href="#portfolio">Portfolio</a>
-   <a href="#contact">Contact</a>
+  <a href="#services">SERVICES</a>
+  <a href="#portfolio">PORTFOLIO</a>
+  <a href="#contact">CONTACT</a>
  </nav>
 </header>
 
-<section class="hero" id="hero">
+<section class="hero">
  <canvas id="particles"></canvas>
- <h2 class="hero-title">Forging Visual Experiences</h2>
- <p class="hero-subtitle">Premium Graphic Design by Avoliro</p>
- <a class="cta-btn" href="#contact">Work With Us</a>
+ <h2 class="hero-title">INKFORGE</h2>
+ <p class="hero-subtitle" data-text="Where Brands Are Forged Into Legends">
+   Where Brands Are Forged Into Legends
+ </p>
+ <a href="#contact" class="cta-btn">START A PROJECT</a>
 </section>
 
 <section id="services">
- <h3>Our Expertise</h3>
+ <h3>Core Capabilities</h3>
  <div class="cards">
-   <div class="card"><h4>Brand Identity</h4><p>Logo, Branding, Guidelines</p></div>
-   <div class="card"><h4>Packaging Design</h4><p>Print-ready product packaging</p></div>
-   <div class="card"><h4>Ad Creatives</h4><p>Social & Paid campaign visuals</p></div>
+  <div class="card"><h4>Brand Identity</h4><p>Premium logo & brand systems.</p></div>
+  <div class="card"><h4>Packaging Design</h4><p>Retail & luxury product packaging.</p></div>
+  <div class="card"><h4>Ad Campaign Visuals</h4><p>Bold creatives for digital campaigns.</p></div>
  </div>
 </section>
 
 <section id="portfolio">
  <h3>Case Studies</h3>
  <div class="slider-container">
-   <button class="slide-btn left" onclick="prevSlide()">‹</button>
-   <div class="slider">
-     <div class="slide">
-       <img src="https://via.placeholder.com/900x500?text=Your+Project+Here">
-       <p class="caption">Branding Showcase</p>
-     </div>
-     <div class="slide">
-       <img src="https://via.placeholder.com/900x500?text=Add+Your+Work">
-       <p class="caption">Product Design</p>
-     </div>
-     <div class="slide">
-       <img src="https://via.placeholder.com/900x500?text=Portfolio+Coming+Soon">
-       <p class="caption">Campaign Graphics</p>
-     </div>
+  <button class="slide-btn left" onclick="prevSlide()">‹</button>
+  <div class="slider">
+   <div class="slide">
+    <img src="https://via.placeholder.com/900x500?text=Portfolio+Work">
+    <p class="caption">Premium Branding</p>
    </div>
-   <button class="slide-btn right" onclick="nextSlide()">›</button>
+   <div class="slide">
+    <img src="https://via.placeholder.com/900x500?text=Packaging+Design">
+    <p class="caption">Retail-Ready Packaging</p>
+   </div>
+   <div class="slide">
+    <img src="https://via.placeholder.com/900x500?text=Campaign+Visuals">
+    <p class="caption">Ad Campaigns</p>
+   </div>
+  </div>
+  <button class="slide-btn right" onclick="nextSlide()">›</button>
  </div>
 </section>
 
 <section id="contact">
- <h3>Let’s Build Something Bold</h3>
- <p>Share what you need, we’ll forge it.</p>
- <a href="mailto:avoliro@contact" class="cta-btn">Email Us</a>
+ <h3>Let’s Build Something Iconic</h3>
+ <p style="opacity:.85;font-size:20px;margin-bottom:25px;">Share your vision. We forge greatness.</p>
+ <a href="mailto:avoliro@contact" class="cta-btn">Email InkForge</a>
 </section>
 
-<footer>© 2025 InkForge — Avoliro Sub-Brand</footer>
+<footer>
+ © 2025 InkForge — <span>Powered by AVOLIRO</span>
+</footer>
 
 
 <script>
-/* === PAGE TRANSITION === */
-window.onload=()=>document.body.classList.add("fade-enter-active");
+/* PAGE TRANSITION + TAGLINE TYPING + HAMMER EXIT */
+window.onload = () => {
+  document.body.classList.add("fade-enter-active");
+  startTaglineTyping();
+  startHammerAnimation();
+};
 
-/* === SLIDER === */
+/* TAGLINE TYPING EFFECT */
+function startTaglineTyping(){
+  const el = document.querySelector('.hero-subtitle');
+  if(!el) return;
+  const full = el.getAttribute('data-text') || el.textContent.trim();
+  el.textContent = "";
+  let i = 0;
+  (function type(){
+    if(i <= full.length){
+      el.textContent = full.slice(0, i);
+      i++;
+      setTimeout(type, 40);
+    }
+  })();
+}
+
+/* HAMMER OVERLAY FADE OUT */
+function startHammerAnimation(){
+  const overlay = document.getElementById('hammerOverlay');
+  if(!overlay) return;
+  overlay.style.opacity = '1';
+  setTimeout(() => {
+    overlay.style.transition = 'opacity 0.6s ease-out';
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 650);
+  }, 900);
+}
+
+/* SLIDESHOW */
 let slideIndex=0;
 const slides=document.querySelectorAll('.slide');
 const showSlide=i=>slides.forEach((s,index)=>s.style.transform=`translateX(${(index-i)*100}%)`);
 showSlide(0);
-const nextSlide=()=>{slideIndex=(slideIndex+1)%slides.length;showSlide(slideIndex)};
-const prevSlide=()=>{slideIndex=(slideIndex-1+slides.length)%slides.length;showSlide(slideIndex)};
+function nextSlide(){slideIndex=(slideIndex+1)%slides.length;showSlide(slideIndex);}
+function prevSlide(){slideIndex=(slideIndex-1+slides.length)%slides.length;showSlide(slideIndex);}
 
-/* === MOUSE LIGHT PARALLAX ON CARDS === */
-document.querySelectorAll('.card').forEach(card=>{
- card.addEventListener('mousemove',e=>{
-  const r=card.getBoundingClientRect();
-  const x=e.clientX-r.left,y=e.clientY-r.top;
-  const rx=(y-r.height/2)/20,ry=(x-r.width/2)/20;
-  card.style.transform=`rotateX(${-rx}deg) rotateY(${ry}deg)`;
-  card.style.boxShadow=`${ry*2}px ${rx*2}px 20px rgba(229,9,20,0.5)`;
- })
- card.addEventListener('mouseleave',()=>{
-  card.style.transform=`rotateX(0deg) rotateY(0deg)`;
-  card.style.boxShadow=`0 0 0 rgba(0,0,0,0)`;
- })
-})
-
-/* === FORGE SPARK PARTICLES (Glow + physics) === */
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-canvas.width=innerWidth;canvas.height=innerHeight;
-let p=[];
+/* PARTICLE FORGE EFFECT */
+const c=document.getElementById('particles');
+const ctx=c.getContext('2d');
+c.width=innerWidth;c.height=innerHeight;
+let sparks=[];
 class Spark{
- constructor(){
-   this.reset();
- }
+ constructor(){this.reset();}
  reset(){
-   this.x=innerWidth/2+(Math.random()-0.5)*200;
-   this.y=innerHeight-50;
-   this.vx=(Math.random()-0.5)*3;
-   this.vy=-Math.random()*4-2;
-   this.alpha=1;
-   this.size=Math.random()*4+1;
+  this.x=innerWidth/2+(Math.random()-0.5)*250;
+  this.y=innerHeight-50;
+  this.vx=(Math.random()-0.5)*3;
+  this.vy=-Math.random()*4-3;
+  this.alpha=1;this.size=Math.random()*3+1;
  }
  update(){
-   this.x+=this.vx;this.y+=this.vy;
-   this.vy+=.05;this.alpha-=.01;
-   if(this.alpha<=0)this.reset();
+  this.x+=this.vx;this.y+=this.vy;
+  this.vy+=.07;this.alpha-=.01;
+  if(this.alpha<=0)this.reset();
  }
  draw(){
-   ctx.beginPath();
-   ctx.fillStyle=`rgba(229,9,20,${this.alpha})`;
-   ctx.shadowBlur=12;ctx.shadowColor="#ff2a33";
-   ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-   ctx.fill();ctx.closePath();
+  ctx.beginPath();
+  ctx.fillStyle=`rgba(229,9,20,${this.alpha})`;
+  ctx.shadowBlur=20;ctx.shadowColor="#e50914";
+  ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+  ctx.fill();ctx.closePath();
  }
 }
-for(let i=0;i<120;i++)p.push(new Spark());
-function loop(){
- ctx.clearRect(0,0,canvas.width,canvas.height);
- p.forEach(s=>{s.update();s.draw()});
- requestAnimationFrame(loop);
+for(let i=0;i<120;i++)sparks.push(new Spark());
+function animate(){
+ ctx.clearRect(0,0,c.width,c.height);
+ sparks.forEach(s=>{s.update();s.draw()});
+ requestAnimationFrame(animate);
 }
-loop();
-
+animate();
 </script>
 
 </body>
