@@ -17,18 +17,17 @@
   --accent:#e50914;
 }
 
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
-  background:
-    radial-gradient(1200px 600px at 20% -10%,#12141c 0%,var(--bg) 60%);
+  background:radial-gradient(1200px 600px at 20% -10%,#12141c 0%,var(--bg) 60%);
   color:var(--text);
   font-family:"Inter",sans-serif;
   line-height:1.65;
   overflow-x:hidden;
 }
 
-/* NAV */
+/* ===== NAV ===== */
 .nav{
   position:fixed;
   top:0;left:0;right:0;
@@ -48,11 +47,7 @@ body{
   align-items:center;
   gap:16px;
 }
-
-.brand-logo{
-  height:42px;
-}
-
+.brand-logo{height:42px}
 .division-badge{
   font-size:11px;
   letter-spacing:1.6px;
@@ -62,19 +57,18 @@ body{
   border:1px solid var(--border);
   border-radius:999px;
 }
-
 nav a{
   margin-left:26px;
-  text-decoration:none;
   font-size:13px;
   letter-spacing:1.6px;
   text-transform:uppercase;
   color:var(--muted);
+  text-decoration:none;
   font-weight:600;
 }
 nav a:hover{color:var(--text)}
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
   min-height:100vh;
   padding:160px 56px 120px;
@@ -83,13 +77,11 @@ nav a:hover{color:var(--text)}
   gap:64px;
   align-items:center;
 }
-
 .hero-left h1{
   font-size:76px;
   font-weight:900;
   letter-spacing:6px;
 }
-
 .hero-left .sub{
   margin-top:18px;
   font-size:15px;
@@ -97,7 +89,6 @@ nav a:hover{color:var(--text)}
   text-transform:uppercase;
   color:var(--muted);
 }
-
 .hero-left .tagline{
   margin-top:8px;
   font-size:13px;
@@ -105,7 +96,6 @@ nav a:hover{color:var(--text)}
   text-transform:uppercase;
   color:var(--accent);
 }
-
 .hero-left .lead{
   margin-top:14px;
   font-size:13px;
@@ -116,7 +106,6 @@ nav a:hover{color:var(--text)}
   color:var(--accent);
   font-weight:800;
 }
-
 .cta-row{
   margin-top:42px;
   display:flex;
@@ -130,6 +119,7 @@ nav a:hover{color:var(--text)}
   text-transform:uppercase;
   text-decoration:none;
   font-weight:700;
+  transition:transform .25s ease, box-shadow .25s ease;
 }
 .btn.primary{
   background:var(--accent);
@@ -138,6 +128,10 @@ nav a:hover{color:var(--text)}
 .btn.secondary{
   border:1px solid var(--border);
   color:var(--text);
+}
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 /* HERO PANEL */
@@ -148,24 +142,10 @@ nav a:hover{color:var(--text)}
   padding:38px;
 }
 
-.hero-panel h4{
-  font-size:13px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--muted);
-  margin-bottom:14px;
-}
-
-.hero-panel p{
-  font-size:15px;
-  color:#d6d8de;
-}
-
-/* SECTIONS */
+/* ===== SECTIONS ===== */
 section{
   padding:120px 56px;
 }
-
 section h3{
   font-size:32px;
   font-weight:800;
@@ -193,16 +173,11 @@ section h3{
   border:1px solid var(--border);
   border-radius:20px;
   padding:28px;
+  transition:transform .3s ease, box-shadow .3s ease;
 }
-.service h4{
-  font-size:15px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-.service p{
-  font-size:14px;
-  color:var(--muted);
+.service:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.45);
 }
 
 /* PROCESS */
@@ -217,19 +192,6 @@ section h3{
   border:1px solid var(--border);
   border-radius:20px;
 }
-.step span{
-  font-size:11px;
-  letter-spacing:2px;
-  color:var(--muted);
-}
-.step h4{
-  margin:10px 0 6px;
-  font-size:17px;
-}
-.step p{
-  font-size:14px;
-  color:#c9ccd2;
-}
 
 /* CONTACT */
 .contact-box{
@@ -239,32 +201,35 @@ section h3{
   border-radius:24px;
   padding:42px;
 }
-.contact-box p{
-  font-size:15px;
-  color:#d5d7db;
-}
 
-/* FOOTER */
-footer{
-  padding:40px 56px;
-  border-top:1px solid var(--border);
-  font-size:14px;
-  color:var(--muted);
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .8s ease, transform .8s ease;
 }
-footer span{
-  color:var(--accent);
-  font-weight:800;
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.stagger > *{
+  transition-delay:calc(var(--i) * 0.12s);
 }
 
 /* RESPONSIVE */
 @media(max-width:980px){
-  .hero{
-    grid-template-columns:1fr;
-    padding-top:140px;
-  }
+  .hero{grid-template-columns:1fr;padding-top:140px}
   .hero-left h1{font-size:52px}
   .nav{padding:0 24px}
   section{padding:90px 24px}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  *{
+    animation:none!important;
+    transition:none!important;
+  }
 }
 </style>
 </head>
@@ -285,108 +250,74 @@ footer span{
 </header>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero reveal">
   <div class="hero-left">
     <h1>INKFORGE</h1>
     <p class="sub">Design & Visual Identity Division of AVOLIRO</p>
     <p class="tagline">Elevate Everything</p>
-    <p class="lead">
-      Forged by <span>Srishti</span> — Lead Designer · Industrial Creative
-    </p>
+    <p class="lead">Forged by <span>Srishti</span> — Lead Designer · Industrial Creative</p>
     <div class="cta-row">
       <a href="#contact" class="btn primary">Start a Project</a>
       <a href="#about" class="btn secondary">Learn More</a>
     </div>
   </div>
-
   <div class="hero-panel">
-    <h4>Division Role</h4>
-    <p>
-      InkForge is AVOLIRO’s design execution arm.
-      <br><br>
-      Where AVOLIRO defines strategy and direction, InkForge elevates brands
-      through visual systems — ensuring every touchpoint looks intentional,
-      consistent, and premium.
-    </p>
+    InkForge is AVOLIRO’s design execution arm — translating strategy into
+    precise, scalable visual systems.
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
+<section id="about" class="reveal">
   <h3>About InkForge</h3>
   <div class="about">
-    InkForge exists to <strong>elevate everything that AVOLIRO builds visually</strong>.
-    <br><br>
-    As a dedicated division within AVOLIRO, InkForge focuses exclusively on design and
-    visual identity — translating strategy into clear, scalable, and high-impact
-    brand systems.
-    <br><br>
-    Led by <strong>Srishti</strong>, the division balances creative instinct with
-    disciplined execution.
+    InkForge exists to <strong>elevate everything AVOLIRO builds visually</strong>.
+    As a focused division, it handles identity, packaging and creative systems
+    with discipline and precision.
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
+<section id="services" class="reveal">
   <h3>Division Responsibilities</h3>
-  <div class="services">
-    <div class="service">
-      <h4>Brand Identity</h4>
-      <p>Logos, typography, color systems and brand guidelines.</p>
-    </div>
-    <div class="service">
-      <h4>Packaging Design</h4>
-      <p>Product packaging engineered for authority and clarity.</p>
-    </div>
-    <div class="service">
-      <h4>Creative Assets</h4>
-      <p>Campaign visuals, social systems and launch creatives.</p>
-    </div>
+  <div class="services stagger">
+    <div class="service" style="--i:0">Brand Identity Systems</div>
+    <div class="service" style="--i:1">Packaging Design</div>
+    <div class="service" style="--i:2">Creative Campaign Assets</div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section id="process">
+<section id="process" class="reveal">
   <h3>How InkForge Works</h3>
-  <div class="process">
-    <div class="step">
-      <span>01 — AVOLIRO Strategy</span>
-      <h4>Blueprint</h4>
-      <p>Design direction is derived from AVOLIRO’s strategic layer.</p>
-    </div>
-    <div class="step">
-      <span>02 — Design Execution</span>
-      <h4>Forge</h4>
-      <p>Concepts are created and tested within a controlled system.</p>
-    </div>
-    <div class="step">
-      <span>03 — Precision</span>
-      <h4>Temper</h4>
-      <p>Visual details are refined for consistency and scalability.</p>
-    </div>
-    <div class="step">
-      <span>04 — Integration</span>
-      <h4>Deploy</h4>
-      <p>Assets are delivered to integrate seamlessly across AVOLIRO projects.</p>
-    </div>
+  <div class="process stagger">
+    <div class="step" style="--i:0">Blueprint — AVOLIRO Strategy</div>
+    <div class="step" style="--i:1">Forge — Design Execution</div>
+    <div class="step" style="--i:2">Temper — Precision Refinement</div>
+    <div class="step" style="--i:3">Deploy — System Integration</div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="reveal">
   <h3>Work With InkForge</h3>
   <div class="contact-box">
-    <p>
-      To start a design project, contact AVOLIRO directly or email:
-      <br><br>
-      <strong>avoliro@contact</strong>
-    </p>
+    Contact AVOLIRO directly or email <strong>avoliro@contact</strong>
   </div>
 </section>
 
 <footer>
-  © 2025 InkForge — <span>Powered by AVOLIRO</span>
+  © 2025 InkForge — <span style="color:#e50914;font-weight:800">Powered by AVOLIRO</span>
 </footer>
+
+<script>
+/* ===== INTERSECTION OBSERVER ===== */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:.15});
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
 
 </body>
 </html>
